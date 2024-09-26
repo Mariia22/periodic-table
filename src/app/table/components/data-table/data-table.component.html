@@ -1,4 +1,7 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table
+  mat-table
+  [dataSource]="dataSource | async | filter: searchText"
+  class="mat-elevation-z8">
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef>No.</th>
     <td mat-cell *matCellDef="let element">{{ element.position }}</td>

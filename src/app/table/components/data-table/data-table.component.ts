@@ -7,11 +7,13 @@ import { PeriodicRepositoryService } from "../../services/periodic-repository.se
 import { Observable } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { EditTablePopup } from "../edit-table-popup/edit-table-popup.component";
+import { FilterPipe } from "../../../filter/pipes/filter-pipe.pipe";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
   selector: "app-data-table",
   standalone: true,
-  imports: [MatTableModule, MatIconModule],
+  imports: [MatTableModule, MatIconModule, FilterPipe, AsyncPipe],
   templateUrl: "./data-table.component.html",
   styleUrl: "./data-table.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +23,7 @@ export class DataTableComponent {
   displayedColumns: string[] = ["position", "name", "weight", "symbol", "edit"];
   dataSource: Observable<PeriodicElement[]>;
   dialog = inject(MatDialog);
+  searchText = "";
 
   constructor(
     private _state: RxState<PeriodicTableState>,
