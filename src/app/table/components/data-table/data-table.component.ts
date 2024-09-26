@@ -30,14 +30,14 @@ export class DataTableComponent {
     this.dataSource = this._state.select("elements");
   }
 
-  onEdit(element:PeriodicElement) {
+  onEdit(element: PeriodicElement) {
     this.dialog.open(EditTablePopup, {
       data: {
         position: element.position,
         name: element.name,
         weight: element.weight,
         symbol: element.symbol,
-      }
+      },
     });
   }
 }

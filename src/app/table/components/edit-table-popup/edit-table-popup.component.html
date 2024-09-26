@@ -1,24 +1,33 @@
 <div class="dialog">
-<h2 mat-dialog-title>Edit element</h2>
-<mat-dialog-content>
-  <form [formGroup]="editTableRowForm" class="dialog__form"> 
-    <mat-form-field>
-    <mat-label>No.</mat-label>
-    <input type="number" formControlName="position" matInput aria-label="position"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input type="text" formControlName="name" matInput aria-label="name"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Weight</mat-label>
-    <input type="number" formControlName="weight" matInput aria-label="weight"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Symbol</mat-label>
-    <input type="text" formControlName="symbol" matInput aria-label="symbol"/>
-  </mat-form-field>
-  <button mat-flat-button [disabled]="editTableRowForm.invalid" (click)="onSubmit()">Save</button>
-  </form>
-</mat-dialog-content>
+  <h2 mat-dialog-title>Edit element</h2>
+  <mat-dialog-content>
+    <form [formGroup]="editTableRowForm" class="dialog__form">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text" formControlName="name" matInput aria-label="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Weight</mat-label>
+        <input
+          type="number"
+          formControlName="weight"
+          matInput
+          aria-label="weight" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Symbol</mat-label>
+        <input
+          type="text"
+          formControlName="symbol"
+          matInput
+          aria-label="symbol" />
+      </mat-form-field>
+      <button
+        mat-flat-button
+        [disabled]="editTableRowForm.invalid"
+        (click)="onSubmit()">
+        Save
+      </button>
+    </form>
+  </mat-dialog-content>
 </div>

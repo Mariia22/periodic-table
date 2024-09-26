@@ -10,6 +10,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
   MatDialogContent,
+  MatDialogRef,
 } from "@angular/material/dialog";
 import { MatFormField, MatLabel } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -32,6 +33,7 @@ import { MatInputModule } from "@angular/material/input";
 export class EditTablePopup {
   data = inject(MAT_DIALOG_DATA);
   editTableRowForm: FormGroup;
+  dialogRef = inject(MatDialogRef<EditTablePopup>);
 
   constructor(private _fb: FormBuilder) {
     this.editTableRowForm = this._fb.group({
@@ -43,6 +45,10 @@ export class EditTablePopup {
   }
 
   onSubmit() {
-    console.log("submit");
+    if (this.editTableRowForm.valid) {
+      const updatedData = this.editTableRowForm.value;
+      this.dialogRef.close(updatedData);
+      console.log("Updated Data: ", updatedData);
+    }
   }
 }
