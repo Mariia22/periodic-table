@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { PeriodicRepositoryService } from './periodic-repository.service';
+import { TestBed } from "@angular/core/testing";
+import { PeriodicRepositoryService } from "./periodic-repository.service";
 
-describe('PeriodicRepositoryService', () => {
+describe("PeriodicRepositoryService", () => {
   let service: PeriodicRepositoryService;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('PeriodicRepositoryService', () => {
     service = TestBed.inject(PeriodicRepositoryService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });
