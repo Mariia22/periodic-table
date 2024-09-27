@@ -1,6 +1,6 @@
 <table
   mat-table
-  [dataSource]="dataSource | async | filter: searchText"
+  [dataSource]="(filteredData$ | async) || []"
   class="mat-elevation-z8">
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef>No.</th>

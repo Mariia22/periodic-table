@@ -2,8 +2,7 @@
   <mat-label>Search </mat-label>
   <input
     matInput
-    [formControl]="searchControl"
     placeholder="Type to search"
     #input
-    (keydown.enter)="searchElements(input.value)" />
+    (keyup)="searchElements(input.value)" />
 </mat-form-field>

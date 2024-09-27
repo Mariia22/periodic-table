@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -29,6 +29,7 @@ import { MatInputModule } from "@angular/material/input";
   ],
   templateUrl: "./edit-table-popup.component.html",
   styleUrl: "./edit-table-popup.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditTablePopup {
   data = inject(MAT_DIALOG_DATA);
