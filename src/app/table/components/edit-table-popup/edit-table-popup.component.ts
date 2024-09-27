@@ -47,9 +47,7 @@ export class EditTablePopup {
 
   onSubmit() {
     if (this.editTableRowForm.valid) {
-      const updatedData = this.editTableRowForm.value;
-      this.dialogRef.close(updatedData);
-      console.log("Updated Data: ", updatedData);
+      this.dialogRef.close(this.editTableRowForm.value);
     }
   }
 }

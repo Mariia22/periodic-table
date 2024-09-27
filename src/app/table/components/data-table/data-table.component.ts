@@ -19,7 +19,7 @@ import { SearchService } from "../../../shared/services/search-service/search-se
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableComponent {
-  displayedColumns: string[] = ["position", "name", "weight", "symbol", "edit"];
+  displayedColumns: string[] = ["number", "name", "weight", "symbol", "edit"];
   dialog = inject(MatDialog);
   private _searchService = inject(SearchService);
   private _elementsRepository: PeriodicRepositoryService = inject(
@@ -46,14 +46,31 @@ export class DataTableComponent {
     })
   );
 
-  onEdit(element: PeriodicElement) {
-    this.dialog.open(EditTablePopup, {
+  onUpdate(element: PeriodicElement) {
+    const dialogRef = this.dialog.open(EditTablePopup, {
       data: {
         position: element.position,
         name: element.name,
         weight: element.weight,
         symbol: element.symbol,
       },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.updateTableData(result);
+      }
+    });
+  }
+
+  updateTableData(updatedElement: PeriodicElement) {
+    this._state.set({
+      elements: this._state.get("elements").map((element: PeriodicElement) => {
+        if (element.position === updatedElement.position) {
+          return updatedElement;
+        }
+        return element;
+      }),
     });
   }
 }
