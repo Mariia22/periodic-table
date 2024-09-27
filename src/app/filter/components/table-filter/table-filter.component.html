@@ -1,8 +1,10 @@
-<mat-form-field appearance="fill">
-  <mat-label>Search </mat-label>
-  <input
-    matInput
-    placeholder="Type to search"
-    #input
-    (keyup)="searchElements(input.value)" />
-</mat-form-field>
+<form>
+  <mat-form-field subscriptSizing="dynamic" appearance="fill">
+    <mat-label>Search </mat-label>
+    <input
+      matInput
+      [formControl]="searchControl"
+      placeholder="Type to search"
+      #searchElement />
+  </mat-form-field>
+</form>
