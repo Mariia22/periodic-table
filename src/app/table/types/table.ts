@@ -8,3 +8,5 @@ export interface PeriodicElement {
 export interface PeriodicTableState {
   elements: PeriodicElement[];
 }
+
+export type ColumnType = "position" | "name" | "weight" | "symbol" | "edit";
