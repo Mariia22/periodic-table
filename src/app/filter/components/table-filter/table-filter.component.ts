@@ -8,7 +8,7 @@ import { MatFormFieldModule, MatLabel } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { SearchService } from "../../../shared/services/search-service/search-service.service";
 import { debounceTime, distinctUntilChanged } from "rxjs";
-import { FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({

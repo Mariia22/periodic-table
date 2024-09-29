@@ -2,76 +2,69 @@ import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { MatTableModule } from "@angular/material/table";
 import { MatIconModule } from "@angular/material/icon";
 import { rxState } from "@rx-angular/state";
-import { PeriodicElement, PeriodicTableState } from "../../types/table";
-import { PeriodicRepositoryService } from "../../services/periodic-repository.service";
-import { combineLatest, map } from "rxjs";
+import {
+  ColumnType,
+  PeriodicElement,
+  PeriodicTableState,
+} from "../../types/table";
+import { take } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { EditTablePopup } from "../edit-table-popup/edit-table-popup.component";
-import { AsyncPipe } from "@angular/common";
+import { AsyncPipe, NgFor } from "@angular/common";
 import { SearchService } from "../../../shared/services/search-service/search-service.service";
+import { RxIf } from "@rx-angular/template/if";
+import { DataTableService } from "../../services/data-table/data-table.service";
+import { PeriodicRepositoryService } from "../../services/repository/periodic-repository.service";
 
 @Component({
   selector: "app-data-table",
   standalone: true,
-  imports: [MatTableModule, MatIconModule, AsyncPipe],
+  imports: [MatTableModule, MatIconModule, AsyncPipe, NgFor, RxIf],
   templateUrl: "./data-table.component.html",
   styleUrl: "./data-table.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableComponent {
-  displayedColumns: string[] = ["number", "name", "weight", "symbol", "edit"];
-  dialog = inject(MatDialog);
   private _searchService = inject(SearchService);
-  private _elementsRepository: PeriodicRepositoryService = inject(
-    PeriodicRepositoryService
-  );
+  private _dataTableService = inject(DataTableService);
+  private _elementsRepository = inject(PeriodicRepositoryService);
   private _state = rxState<PeriodicTableState>(({ set, connect }) => {
     set({ elements: [] });
     connect("elements", this._elementsRepository.getElements());
   });
+  displayedColumns: ColumnType[] = this._dataTableService.columns;
+  dialog = inject(MatDialog);
 
-  filteredData$ = combineLatest([
+  filteredData$ = this._dataTableService.createFilteredDataObservable(
     this._state.select("elements"),
-    this._searchService.search$,
-  ]).pipe(
-    map(([elements, searchText]) => {
-      console.log("here");
-      return elements.filter((element: PeriodicElement) => {
-        const searchLower = searchText.toLowerCase();
-        return (
-          element.name.toLowerCase().includes(searchLower) ||
-          element.weight.toString().toLowerCase().includes(searchLower) ||
-          element.symbol.toLowerCase().includes(searchLower)
-        );
-      });
-    })
+    this._searchService.search$
   );
+
+  getColumnHeader(column: ColumnType): string {
+    return this._dataTableService.getColumnHeader(column);
+  }
 
   onUpdate(element: PeriodicElement) {
     const dialogRef = this.dialog.open(EditTablePopup, {
-      data: {
-        position: element.position,
-        name: element.name,
-        weight: element.weight,
-        symbol: element.symbol,
-      },
+      data: { ...element },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.updateTableData(result);
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result) => {
+        if (result) {
+          this.updateTableData(result);
+        }
+      });
   }
 
-  updateTableData(updatedElement: PeriodicElement) {
+  private updateTableData(updatedElement: PeriodicElement) {
     this._state.set({
-      elements: this._state.get("elements").map((element: PeriodicElement) => {
-        if (element.position === updatedElement.position) {
-          return updatedElement;
-        }
-        return element;
-      }),
+      elements: this._dataTableService.updateTable(
+        this._state.get("elements"),
+        updatedElement
+      ),
     });
   }
 }
