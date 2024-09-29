@@ -1,18 +1,7 @@
-form {
-  width: 50%;
-  margin: 30px auto;
-}
-
 mat-form-field {
-  width: 100%;
+  width: 300px;
 }
 
 input {
   width: 100%;
-}
-
-@media (max-width: 480px) {
-  form {
-    width: 80%;
-  }
 }
