@@ -15,11 +15,12 @@ import { SearchService } from "../../../shared/services/search-service/search-se
 import { RxIf } from "@rx-angular/template/if";
 import { DataTableService } from "../../services/data-table/data-table.service";
 import { PeriodicRepositoryService } from "../../services/repository/periodic-repository.service";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: "app-data-table",
   standalone: true,
-  imports: [MatTableModule, MatIconModule, AsyncPipe, NgFor, RxIf],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, AsyncPipe, NgFor, RxIf],
   templateUrl: "./data-table.component.html",
   styleUrl: "./data-table.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
