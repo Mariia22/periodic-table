@@ -11,4 +11,4 @@
 
 ## Deploy
 
-[PeriodicElements](https://deploy-preview-2--mendeleev-table.netlify.app/)
+[Periodic elements](https://deploy-preview-2--mendeleev-table.netlify.app/)
