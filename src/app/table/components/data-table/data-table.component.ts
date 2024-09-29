@@ -35,6 +35,7 @@ export class DataTableComponent {
     this._searchService.search$,
   ]).pipe(
     map(([elements, searchText]) => {
+      console.log("here");
       return elements.filter((element: PeriodicElement) => {
         const searchLower = searchText.toLowerCase();
         return (
