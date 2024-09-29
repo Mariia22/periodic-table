@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--mdc-filled-text-field-label-text-color);
+  background-color: var(--mdc-filled-text-field-caret-color);
+
+  &__icon {
+    color: white;
+  }
+}

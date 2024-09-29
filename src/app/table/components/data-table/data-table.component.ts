@@ -20,7 +20,14 @@ import { MatButtonModule } from "@angular/material/button";
 @Component({
   selector: "app-data-table",
   standalone: true,
-  imports: [MatTableModule, MatIconModule, MatButtonModule, AsyncPipe, NgFor, RxIf],
+  imports: [
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    AsyncPipe,
+    NgFor,
+    RxIf,
+  ],
   templateUrl: "./data-table.component.html",
   styleUrl: "./data-table.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
