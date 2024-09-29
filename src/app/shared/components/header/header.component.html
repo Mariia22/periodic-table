@@ -1,8 +1,6 @@
 <div class="header">
-  <button mat-icon-button (click)="toggleSearch()">
+  <div class="header__search">
     <mat-icon class="header__icon">search</mat-icon>
-  </button>
-  <div *rxIf="showSearchInput">
     <app-table-filter />
   </div>
 </div>

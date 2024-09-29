@@ -11,10 +11,4 @@ import { RxIf } from "@rx-angular/template/if";
   templateUrl: "./header.component.html",
   styleUrl: "./header.component.scss",
 })
-export class HeaderComponent {
-  showSearchInput = false;
-
-  toggleSearch() {
-    this.showSearchInput = !this.showSearchInput;
-  }
-}
+export class HeaderComponent {}
