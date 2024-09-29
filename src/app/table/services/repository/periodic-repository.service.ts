@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { of } from "rxjs";
-import { PeriodicElement } from "../types/table";
+import { PeriodicElement } from "../../types/table";
 
 @Injectable({
   providedIn: "root",
